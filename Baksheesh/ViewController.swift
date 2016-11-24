@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var tipPercentageLabel: UILabel!
+    @IBOutlet weak var tipSlider: UISlider!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
     override func viewDidLoad() {
@@ -30,13 +32,29 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
-        let tipPercentages = [0.15, 0.2, 0.25]
-        let amount = Double(amountField.text!) ?? 0.0
-        let tip = amount * tipPercentages[tipControl.selectedSegmentIndex]
+        let tipPercentages: [Float] = [0.15, 0.2, 0.25]
+        var tipPercentage = tipSlider.value
+        if sender is UISegmentedControl {
+            tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
+            tipSlider.setValue(Float(tipPercentage), animated: true)
+        }
+        else if sender is UISlider {
+            let position = tipPercentages.index(of: tipSlider.value)
+            if(position != nil) {
+                tipPercentage = tipPercentages[position!]
+            }
+            else {
+                tipControl.selectedSegmentIndex = UISegmentedControlNoSegment
+            }
+        }
+        
+        let amount = Float(amountField.text!) ?? 0.0
+        let tip = amount * tipPercentage
         let total = amount + tip
         
-        tipLabel.text = String(format: "$%.2llf", tip)
-        totalLabel.text = String(format: "$%.2llf", total)
+        tipLabel.text = String(format: "$%.2lf", tip)
+        totalLabel.text = String(format: "$%.2lf", total)
+        tipPercentageLabel.text = String(format: "%.2lf%%", tipPercentage * 100)
     }
 }
 
