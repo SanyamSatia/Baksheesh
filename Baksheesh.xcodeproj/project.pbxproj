@@ -14,6 +14,7 @@
 		A4A5A5641DE64C95006C4402 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4A5A5621DE64C95006C4402 /* LaunchScreen.storyboard */; };
 		A4A5A56F1DE64C95006C4402 /* BaksheeshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5A56E1DE64C95006C4402 /* BaksheeshTests.swift */; };
 		A4A5A57A1DE64C95006C4402 /* BaksheeshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5A5791DE64C95006C4402 /* BaksheeshUITests.swift */; };
+		A4A5A5881DE67186006C4402 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5A5871DE67186006C4402 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A4A5A5751DE64C95006C4402 /* BaksheeshUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaksheeshUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4A5A5791DE64C95006C4402 /* BaksheeshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaksheeshUITests.swift; sourceTree = "<group>"; };
 		A4A5A57B1DE64C95006C4402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4A5A5871DE67186006C4402 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				A4A5A5591DE64C95006C4402 /* AppDelegate.swift */,
 				A4A5A55B1DE64C95006C4402 /* ViewController.swift */,
 				A4A5A55D1DE64C95006C4402 /* Main.storyboard */,
+				A4A5A5871DE67186006C4402 /* SettingsViewController.swift */,
 				A4A5A5601DE64C95006C4402 /* Assets.xcassets */,
 				A4A5A5621DE64C95006C4402 /* LaunchScreen.storyboard */,
 				A4A5A5651DE64C95006C4402 /* Info.plist */,
@@ -261,6 +264,7 @@
 			files = (
 				A4A5A55C1DE64C95006C4402 /* ViewController.swift in Sources */,
 				A4A5A55A1DE64C95006C4402 /* AppDelegate.swift in Sources */,
+				A4A5A5881DE67186006C4402 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

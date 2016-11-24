@@ -78,7 +78,13 @@
                             <outletCollection property="gestureRecognizers" destination="8dh-Hc-9eu" appends="YES" id="iwf-zI-ZGM"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="Baksheesh" id="aHR-i4-rAn"/>
+                    <navigationItem key="navigationItem" title="Baksheesh" id="aHR-i4-rAn">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="FM0-Uz-m9A">
+                            <connections>
+                                <segue destination="QJt-So-PyP" kind="push" id="3jh-rS-fEG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="amountField" destination="FRN-um-tAM" id="xm5-PY-zRp"/>
                         <outlet property="tipControl" destination="o0f-HX-pZ6" id="H6g-zW-leZ"/>
@@ -94,6 +100,21 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="674.5" y="154.5"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="JiZ-9z-KYH">
+            <objects>
+                <viewController id="QJt-So-PyP" customClass="SettingsViewController" customModule="Baksheesh" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3MI-k0-Gkk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JId-eB-26K"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Prh-aB-xlO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1151" y="155"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="604-Um-PW5">
