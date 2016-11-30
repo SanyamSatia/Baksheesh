@@ -16,6 +16,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipPercentageLabel: UILabel!
     @IBOutlet weak var tipSlider: UISlider!
     @IBOutlet weak var tipControl: UISegmentedControl!
+
+    override func viewDidAppear(_ animated: Bool) {
+        amountField.becomeFirstResponder()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        view.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +31,8 @@ class ViewController: UIViewController {
         
         let TIME_INTERVAL = 600.0
         
-        amountField.becomeFirstResponder()
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         let defaults = UserDefaults.standard
         
@@ -42,7 +51,6 @@ class ViewController: UIViewController {
             tipSlider.setValue(defaults.float(forKey: "default_tip_percentage"), animated: true)
             calculateTip(tipSlider)
         }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,12 +59,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onTap(_ sender: AnyObject) {
+        // Remove focus from the amount field when user taps elsewhere
         view.endEditing(true)
     }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
         let tipPercentages: [Float] = [0.15, 0.2, 0.25]
         var tipPercentage = tipSlider.value
+        
+        // 
         if sender is UISegmentedControl {
             tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
             tipSlider.setValue(Float(tipPercentage), animated: true)
@@ -82,6 +93,22 @@ class ViewController: UIViewController {
         tipLabel.text = String(format: "$%.2lf", tip)
         totalLabel.text = String(format: "$%.2lf", total)
         tipPercentageLabel.text = String(format: "%.2lf%%", tipPercentage * 100)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
 }
 
