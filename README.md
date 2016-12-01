@@ -6,6 +6,9 @@ Submitted by: Sanyam Satia
 
 Time spent: 7 hours spent in total
 
+#Etymology
+Baksheesh translates to tipping or charitable giving in some South Asian and Middle Eastern cultures.
+
 ## User Stories
 
 The following **required** functionality is complete:
