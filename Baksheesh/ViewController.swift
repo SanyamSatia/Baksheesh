@@ -40,10 +40,10 @@ class ViewController: UIViewController {
         {
             let last_close_time = defaults.object(forKey: "last_close_time") as! Date
             let elapsed_time = Date().timeIntervalSince(last_close_time)
+            let amount = defaults.float(forKey: "old_amount")
             
-            if elapsed_time <= TIME_INTERVAL {
-                let amt = defaults.float(forKey: "old_amount")
-                amountField.text = String(amt)
+            if elapsed_time <= TIME_INTERVAL && amount != 0.0 {
+                amountField.text = String(amount)
             }
         }
         
@@ -58,16 +58,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func onTap(_ sender: AnyObject) {
-        // Remove focus from the amount field when user taps elsewhere
-        view.endEditing(true)
-    }
+//    @IBAction func onTap(_ sender: AnyObject) {
+//        // Remove focus from the amount field when user taps elsewhere
+//        view.endEditing(true)
+//    }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
         let tipPercentages: [Float] = [0.15, 0.2, 0.25]
         var tipPercentage = tipSlider.value
         
-        // 
+        // Check sender and update other parts appropriately
         if sender is UISegmentedControl {
             tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
             tipSlider.setValue(Float(tipPercentage), animated: true)
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         else if sender is UISlider {
             let position = tipPercentages.index(of: tipSlider.value)
             if(position != nil) {
-                tipPercentage = tipPercentages[position!]
+                tipControl.selectedSegmentIndex = position!
             }
             else {
                 tipControl.selectedSegmentIndex = UISegmentedControlNoSegment

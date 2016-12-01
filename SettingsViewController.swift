@@ -16,7 +16,7 @@ class SettingsViewController: UITableViewController {
         super.viewDidLoad()
         
         let defaults = UserDefaults.standard
-        let current_state = defaults.bool(forKey: "save_amount")
+        let current_state = defaults.bool(forKey: "amount_save")
         
         amountSaveButton.setOn(current_state, animated: false)
         
@@ -41,7 +41,7 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func updateAmountSave(_ sender: AnyObject) {
         let defaults = UserDefaults.standard
-        defaults.set(amountSaveButton.isOn, forKey: "save_amount")
+        defaults.set(amountSaveButton.isOn, forKey: "amount_save")
         defaults.synchronize()
     }
     
