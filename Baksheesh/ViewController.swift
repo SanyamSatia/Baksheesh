@@ -31,11 +31,15 @@ class ViewController: UIViewController {
         
         let TIME_INTERVAL = 600.0
         
+        // Push up/down view with keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         let defaults = UserDefaults.standard
         
+        // Set amount field with old amount if:
+        // a) app was last closed less than 10 mins ago, and,
+        // b) amount retention is enabled
         if defaults.object(forKey: "last_close_time") != nil && (defaults.object(forKey: "amount_save") == nil || defaults.bool(forKey: "amount_save") == true)
         {
             let last_close_time = defaults.object(forKey: "last_close_time") as! Date
@@ -47,6 +51,7 @@ class ViewController: UIViewController {
             }
         }
         
+        // Set tip slider to the default percentage, if set
         if defaults.object(forKey: "default_tip_percentage") != nil {
             tipSlider.setValue(defaults.float(forKey: "default_tip_percentage"), animated: true)
             calculateTip(tipSlider)
@@ -57,11 +62,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-//    @IBAction func onTap(_ sender: AnyObject) {
-//        // Remove focus from the amount field when user taps elsewhere
-//        view.endEditing(true)
-//    }
     
     @IBAction func calculateTip(_ sender: AnyObject) {
         let tipPercentages: [Float] = [0.15, 0.2, 0.25]
@@ -82,6 +82,7 @@ class ViewController: UIViewController {
             }
         }
         
+        // Calculate tip and update labels
         let amount = Float(amountField.text!) ?? 0.0
         let tip = amount * tipPercentage
         let total = amount + tip
